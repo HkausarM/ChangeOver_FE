@@ -1,10 +1,22 @@
 .App-header {
   background-color: white;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: right;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color:#282c34;
+}
+
+.css-1ri6ub7-MuiPaper-root-MuiCard-root {
+  margin-top: 7% !important;
+  margin-left: 35% !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  max-width: 450px;
+  text-align: center;
+}
+
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  margin: 3% !important
 }
