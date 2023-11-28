@@ -86,10 +86,6 @@ function DrawerAppBar(props) {
             >
               <AccountCircle BasicExampleDataGrid />
             </IconButton>
-<<<<<<< Updated upstream
-            {/* <span class="material-icons-outlined">
-filter_list
-</span> */}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -101,11 +97,6 @@ filter_list
               {/* <filter */}
               {/* <Filter1TwoTone /> */}
               
-=======
-            <IconButton color="inherit" aria-label="add to shopping cart"  onClick={handleCart}>
-  <AddShoppingCartIcon />
-</IconButton>
->>>>>>> Stashed changes
           </Box>
         </Toolbar>
       </AppBar>
