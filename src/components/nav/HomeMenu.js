@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SearchAppBar from './SearchBar'
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 const drawerWidth = 240;
 const navItems = ['Buy', 'Sell'];
 
@@ -93,10 +95,6 @@ function DrawerAppBar(props) {
               aria-haspopup="true"
               color="inherit"
             />
-              {/* <AccountCircle /> */}
-              {/* <filter */}
-              {/* <Filter1TwoTone /> */}
-              
           </Box>
         </Toolbar>
       </AppBar>
