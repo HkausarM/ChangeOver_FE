@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SearchAppBar from './SearchBar'
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 const drawerWidth = 240;
 const navItems = ['Buy', 'Sell'];
 
@@ -82,20 +84,9 @@ function DrawerAppBar(props) {
             >
               <AccountCircle BasicExampleDataGrid />
             </IconButton>
-            {/* <span class="material-icons-outlined">
-filter_list
-</span> */}
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            />
-              {/* <AccountCircle /> */}
-              {/* <filter */}
-              {/* <Filter1TwoTone /> */}
-              
+            <IconButton color="inherit" aria-label="add to shopping cart">
+  <AddShoppingCartIcon />
+</IconButton>
           </Box>
         </Toolbar>
       </AppBar>
