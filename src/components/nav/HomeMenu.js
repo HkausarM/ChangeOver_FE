@@ -7,18 +7,14 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SearchAppBar from './SearchBar'
 import AccountCircle from '@mui/icons-material/AccountCircle';
-
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Buy', 'Sell'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -84,8 +80,22 @@ function DrawerAppBar(props) {
               aria-haspopup="true"
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle BasicExampleDataGrid />
             </IconButton>
+            {/* <span class="material-icons-outlined">
+filter_list
+</span> */}
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            />
+              {/* <AccountCircle /> */}
+              {/* <filter */}
+              {/* <Filter1TwoTone /> */}
+              
           </Box>
         </Toolbar>
       </AppBar>
@@ -110,6 +120,7 @@ function DrawerAppBar(props) {
         <Toolbar />
       </Box>
     </Box>
+             
   );
 }
 

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
 .App-header {
   background-color: white;
   /* min-height: 100vh; */
@@ -10,13 +12,33 @@
 }
 
 .css-1ri6ub7-MuiPaper-root-MuiCard-root {
-  margin-top: 7% !important;
-  margin-left: 35% !important;
+  /* margin-top: 3% !important;
+  margin-left: 5% !important; */
+  display: flex;
+  flex-direction: column !important;
+  flex-wrap: wrap;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
   max-width: 450px;
   text-align: center;
+  margin: 5% 5% 5% 5% !important
 }
 
 .css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
   margin: 3% !important
+}
+
+.css-1mcnwpj-MuiList-root {
+  max-width: 180px !important;
+}
+
+.cards-shower {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  justify-content: space-around;
+ 
+}
+
+.cards-details {
+  margin: 2% 0% 2% 0% !important
 }
