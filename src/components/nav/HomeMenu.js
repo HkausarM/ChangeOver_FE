@@ -24,6 +24,18 @@ function DrawerAppBar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  const handleLogin = () => {
+    console.log('account icon clicked')
+  }
+
+  const handleCart = () => {
+    console.log('cart icon clicked')
+  }
+
+  const handleOption = (i) => {
+    console.log(i)
+  }
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -50,15 +62,6 @@ function DrawerAppBar(props) {
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             component="div"
@@ -69,7 +72,7 @@ function DrawerAppBar(props) {
           {/* <SearchAppBar /> */}
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button key={item} sx={{ color: '#fff' }} onClick={event => handleOption(item)}>
                 {item}
               </Button>
             ))}
@@ -79,9 +82,11 @@ function DrawerAppBar(props) {
               aria-controls="primary-search-account-menu"
               aria-haspopup="true"
               color="inherit"
+              onClick={handleLogin}
             >
               <AccountCircle BasicExampleDataGrid />
             </IconButton>
+<<<<<<< Updated upstream
             {/* <span class="material-icons-outlined">
 filter_list
 </span> */}
@@ -96,6 +101,11 @@ filter_list
               {/* <filter */}
               {/* <Filter1TwoTone /> */}
               
+=======
+            <IconButton color="inherit" aria-label="add to shopping cart"  onClick={handleCart}>
+  <AddShoppingCartIcon />
+</IconButton>
+>>>>>>> Stashed changes
           </Box>
         </Toolbar>
       </AppBar>
