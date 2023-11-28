@@ -94,7 +94,10 @@ function DrawerAppBar(props) {
               aria-controls="primary-search-account-menu"
               aria-haspopup="true"
               color="inherit"
-            />
+              onClick={handleCart}
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
