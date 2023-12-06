@@ -16,7 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const drawerWidth = 240;
-const navItems = ['Buy', 'Sell'];
+const navItems = ['Buy', 'Sell', 'About Us'];
 
 function DrawerAppBar(props) {
   const { window } = props;
