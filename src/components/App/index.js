@@ -1,15 +1,17 @@
 import './App.css';
 import HomeMenu from '../nav/HomeMenu';
-import BasicSelect from '../home/Filter';
 import AltCard from '../home/HomeOverlay';
+import NestedList from '../nav/SideNav';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
           <HomeMenu />
-          <BasicSelect />
+          <div className='homeLayout'>
+          <NestedList />
           <AltCard />
+          </div>
       </header>
     </div>
   );

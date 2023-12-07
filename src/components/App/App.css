@@ -42,3 +42,7 @@
 .cards-details {
   margin: 2% 0% 2% 0% !important
 }
+
+.homeLayout {
+  display: flex;
+}
