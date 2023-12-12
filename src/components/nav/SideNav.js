@@ -96,6 +96,12 @@ export default function ClippedDrawer() {
           </List>
         </Box>
       </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Typography variant="h6" sx={{ marginBottom: 3, marginLeft: 4}}>All Products
+        </Typography>
+        <SingleLineGridList />
+      </Box>
     </Box>
   );
 }
