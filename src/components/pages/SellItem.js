@@ -49,7 +49,7 @@ export default function SellItemPage() {
         sendSellItem.push({
             "CustomerName": customerName ? customerName : setCustomerNameError(true),
             "PhoneNumber": phoneNumber ? phoneNumber : setPhoneNumberError(true),
-            "EmailID": email ? email :setEmailIDError(true),
+            "EmailID": email ? email : setEmailIDError(true),
             "Address": address ? address : setAddressError(true),
             "ProductName": productName ? productName : setProductNameError(true),
             "ProductDescription": productDescription ? productDescription : setProductDescriptionError(true),
@@ -59,33 +59,32 @@ export default function SellItemPage() {
             "Age": productAge ? productAge : setAgeError(true),
             "PriceQuoted": priceQuoted ? priceQuoted : setPriceQuotedError(true)
         })
-        console.log("sendSellItem" , sendSellItem)
-        console.log("condition" , customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted)
+
         if (customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted) {
-        console.log("test")
-        fetch(new UrlProvider().getDomainUrl() + '/sell', {
-            method: 'POST',
-            body: JSON.stringify(sendSellItem[0]),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(async (response) => {
-            result = await response.json();
-            if (result.status == 200) {
-                console.log(result)
-                setDialogOpen(true);
-            }
-        });
-    }
+            fetch(new UrlProvider().getDomainUrl() + '/sell', {
+                method: 'POST',
+                body: JSON.stringify(sendSellItem[0]),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(async (response) => {
+                result = await response.json();
+                if (result.status == 200) {
+                    setDialogOpen(true);
+                }
+            });
+        }
     }
 
     const handleChange = (event) => {
         setPriceNegotiable(event.target.value)
-        if(event.target.value != ''){
-            setPriceNegotiableError(false)}
-            else{
-                setPriceNegotiableError(true)  
-            }};
+        if (event.target.value != '') {
+            setPriceNegotiableError(false)
+        }
+        else {
+            setPriceNegotiableError(true)
+        }
+    };
 
     const handleClose = () => {
         setDialogOpen(false);
@@ -109,12 +108,15 @@ export default function SellItemPage() {
                     type="input"
                     autoComplete="off"
                     variant="standard"
-                    onChange={e => {setCustomerName(e.target.value)
-                        if(e.target.value != ''){
-                            setCustomerNameError(false)}
-                            else{
-                                setCustomerNameError(true)  
-                            }}}
+                    onChange={e => {
+                        setCustomerName(e.target.value)
+                        if (e.target.value != '') {
+                            setCustomerNameError(false)
+                        }
+                        else {
+                            setCustomerNameError(true)
+                        }
+                    }}
                     fullWidth
                     required
                     error={isCustomerNameInvalid}
@@ -125,12 +127,15 @@ export default function SellItemPage() {
                     type="telephone"
                     autoComplete="off"
                     variant="standard"
-                    onChange={e => {setPhoneNumber(e.target.value)
-                        if(e.target.value != ''){
-                            setPhoneNumberError(false)}
-                            else{
-                                setPhoneNumberError(true)  
-                            }}}
+                    onChange={e => {
+                        setPhoneNumber(e.target.value)
+                        if (e.target.value != '') {
+                            setPhoneNumberError(false)
+                        }
+                        else {
+                            setPhoneNumberError(true)
+                        }
+                    }}
                     required
                     error={isPhoneNumberInvalid}
                 />
@@ -140,12 +145,15 @@ export default function SellItemPage() {
                     type="email"
                     autoComplete="off"
                     variant="standard"
-                    onChange={e => {setEmailId(e.target.value)
-                        if(e.target.value != ''){
-                            setEmailIDError(false)}
-                            else{
-                                setEmailIDError(true)  
-                            }}}
+                    onChange={e => {
+                        setEmailId(e.target.value)
+                        if (e.target.value != '') {
+                            setEmailIDError(false)
+                        }
+                        else {
+                            setEmailIDError(true)
+                        }
+                    }}
                     required
                     error={isEmailIDInvalid}
                 />
@@ -157,10 +165,11 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setAddress(e.target.value);
-                        if(e.target.value != ''){
-                        setAddressError(false)}
-                        else{
-                            setAddressError(true)  
+                        if (e.target.value != '') {
+                            setAddressError(false)
+                        }
+                        else {
+                            setAddressError(true)
                         }
                     }}
                     required
@@ -174,11 +183,13 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setProductName(e.target.value)
-                        if(e.target.value != ''){
-                            setProductNameError(false)}
-                            else{
-                                setProductNameError(true)  
-                            }}}
+                        if (e.target.value != '') {
+                            setProductNameError(false)
+                        }
+                        else {
+                            setProductNameError(true)
+                        }
+                    }}
                     required
                     error={isProductNameInvalid}
                 />
@@ -190,11 +201,13 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setProductDescription(e.target.value)
-                        if(e.target.value != ''){
-                            setProductDescriptionError(false)}
-                            else{
-                                setProductDescriptionError(true)  
-                            }}}
+                        if (e.target.value != '') {
+                            setProductDescriptionError(false)
+                        }
+                        else {
+                            setProductDescriptionError(true)
+                        }
+                    }}
                     required
                     error={isproductDescription}
                 />
@@ -209,11 +222,13 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setProductSize(e.target.value)
-                        if(e.target.value != ''){
-                            setSizeError(false)}
-                            else{
-                                setSizeError(true)  
-                            }}}
+                        if (e.target.value != '') {
+                            setSizeError(false)
+                        }
+                        else {
+                            setSizeError(true)
+                        }
+                    }}
                     error={isSizeInvalid}
                 > {sizes.map((size) => (
                     <MenuItem key={size} value={size}>
@@ -233,11 +248,13 @@ export default function SellItemPage() {
                     error={isCategoryInvalid}
                     onChange={e => {
                         setProductCategory(e.target.value)
-                        if(e.target.value != ''){
-                            setCategoryError(false)}
-                            else{
-                                setCategoryError(true)  
-                            }}}
+                        if (e.target.value != '') {
+                            setCategoryError(false)
+                        }
+                        else {
+                            setCategoryError(true)
+                        }
+                    }}
                 >
                     {categories.map((category) => (
                         <MenuItem key={category} value={category}>
@@ -252,11 +269,13 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setProductAge(e.target.value)
-                        if(e.target.value != ''){
-                            setAgeError(false)}
-                            else{
-                                setAgeError(true)  
-                            }}
+                        if (e.target.value != '') {
+                            setAgeError(false)
+                        }
+                        else {
+                            setAgeError(true)
+                        }
+                    }
                     }
                     required
                     error={isAgeInvalid}
@@ -268,11 +287,13 @@ export default function SellItemPage() {
                     variant="standard"
                     onChange={e => {
                         setPriceQuoted(e.target.value)
-                        if(e.target.value != ''){
-                            setPriceQuotedError(false)}
-                            else{
-                                setPriceQuotedError(true)  
-                            }}}
+                        if (e.target.value != '') {
+                            setPriceQuotedError(false)
+                        }
+                        else {
+                            setPriceQuotedError(true)
+                        }
+                    }}
                     required
                     error={isPriceQuotedInvalid}
                 />
