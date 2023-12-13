@@ -97,3 +97,12 @@
   margin-left: 68% !important;
   margin-bottom: 5%;
 }
+
+.price-discount {
+display: flex;
+flex-direction: row;
+}
+
+.badge {
+  margin-left: 10%
+}

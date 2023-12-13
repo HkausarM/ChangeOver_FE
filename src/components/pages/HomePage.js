@@ -21,6 +21,7 @@ import SellItemPage from "./SellItem"
 // import Description from "../nav/ProdDetails"
 import BasicSelect from "../nav/Filter"
 import AboutUsPage from './AboutUs';
+import Badge from '@mui/material/Badge';
 
 let prodName = ''
 export default function ClippedDrawer() {
@@ -158,9 +159,19 @@ export default function ClippedDrawer() {
                     <Typography gutterBottom variant="h6" component="div">
                       {product.ProductName}
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {'€' + product.Price}
-                    </Typography>
+                    <div className="price-discount">
+                      <Typography gutterBottom variant="h6" component="div">
+                        {'€' + product.Price}
+                      </Typography>
+                      <div className='badge'>
+                        {product.Discount ? <Badge sx={{
+                          "& .MuiBadge-badge": {
+                            color: "white",
+                            backgroundColor: "red"
+                          }
+                        }} badgeContent={'%' + product.Discount} /> : <></>}
+                      </div>
+                    </div>
                   </CardContent>
                   <CardActions>
                     <Button className="topnav-buttons" size="small">Add To Cart</Button>
