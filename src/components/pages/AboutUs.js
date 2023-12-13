@@ -25,10 +25,10 @@ export default function AboutUsPage () {
         </Typography>
         <Typography variant="body1" paragraph>
           Join our sustainable fashion community and embark on a journey of style and responsibility. Whether you are looking to refresh
-          your wardrobe or find a new home for your gently-worn items, [Your Application Name] is the place to be.
+          your wardrobe or find a new home for your gently-worn items, ChangeOver is the place to be.
         </Typography>
         <Typography variant="body1" paragraph>
-          Thank you for choosing to be a part of the [Your Application Name] family. Together, let's reshape the future of fashion and
+          Thank you for choosing to be a part of the ChangeOver family. Together, let's reshape the future of fashion and
           make a positive impact on the environment. Happy shopping and selling!
         </Typography>
       </Paper>
