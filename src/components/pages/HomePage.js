@@ -24,87 +24,66 @@ import AboutUsPage from './AboutUs';
 
 let prodName = ''
 export default function ClippedDrawer() {
-  
-  const [datas, setData] = useState();
-  const [title, setTitle] = useState(); 
-  const [page, setPage] = useState('');
 
+  const [datas, setData] = useState();
+  const [title, setTitle] = useState();
+  const [page, setPage] = useState('');
 
   const drawerWidth = 240;
 
-const navItems = ['Buy', 'Sell', 'About Us']; 
-const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale']; 
-  const handleLogin = () => {
-    console.log('account icon clicked')
-  }
-
-  const handleCart = () => {
-    console.log('cart icon clicked')
-  }
+  const navItems = ['Buy', 'Sell', 'About Us'];
+  const sideNavItems = ['All Products', 'Men', 'Women', 'Kids', 'On Sale'];
 
   const handleOption = (i) => {
-    console.log(i)
     setPage(i)
   }
 
   const handleSideMenuOption = (i) => {
-    console.log('sideoption', i)
-    if(i !== 'On Sale' && i !== 'All Products')
-    {
-      console.log("1st if")
-    fetch(new UrlProvider().getDomainUrl() + '/category/'+ i)
-    .then(async(response) => {
-      const productResponse = await response.json()
-      setData(productResponse.categoryProducts)
+    if (i !== 'On Sale' && i !== 'All Products') {
+      fetch(new UrlProvider().getDomainUrl() + '/category/' + i)
+        .then(async (response) => {
+          const productResponse = await response.json()
+          setData(productResponse.categoryProducts)
+          setTitle(i)
+        })
+        .catch(error => console.error(error));
+    } else if (i == 'On Sale') {
+      fetch(new UrlProvider().getDomainUrl() + '/home')
+        .then(async (response) => {
+          const productResponse = await response.json()
+          setData(productResponse.saleProducts)
+        })
+        .catch(error => console.error(error));
       setTitle(i)
-    })
-    .catch(error => console.error(error));
-  } else if( i == 'On Sale')
-  {
-    console.log("onsale")
-    fetch(new UrlProvider().getDomainUrl() + '/home')
-      .then(async(response) => {
-        const productResponse = await response.json()
-        setData(productResponse.saleProducts)
-      })
-      .catch(error => console.error(error));
-      setTitle(i)
-  }
-  else if ( i == 'All Products')
-  {
-    console.log("allprod")
-    fetch(new UrlProvider().getDomainUrl() + '/home')
-    .then(async(response) => {
-      const productResponse = await response.json()
-      console.log(productResponse)
-      setData(productResponse.allProducts)
-      setTitle('All Products')
-    })
-    .catch(error => console.error(error));
-  }
+    }
+    else if (i == 'All Products') {
+      fetch(new UrlProvider().getDomainUrl() + '/home')
+        .then(async (response) => {
+          const productResponse = await response.json()
+          setData(productResponse.allProducts)
+          setTitle('All Products')
+        })
+        .catch(error => console.error(error));
+    }
   }
 
   const handleProductClick = (e) => {
-    console.log('opening prod details', e.target.alt)
     prodName = e.target.alt
     setPage('ProductDetails')
-    
-
   }
 
   useEffect(() => {
     setPage('Buy')
     fetch(new UrlProvider().getDomainUrl() + '/home')
-      .then(async(response) => {
+      .then(async (response) => {
         const productResponse = await response.json()
         setData(productResponse.allProducts)
         setTitle('All Products')
       })
       .catch(error => console.error(error));
-    
   }, []);
 
-  function CallBack(childData){
+  function CallBack(childData) {
     setData(childData.filterProducts)
   }
 
@@ -112,7 +91,7 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-      <Toolbar>
+        <Toolbar>
           <Typography
             variant="h6"
             component="div"
@@ -123,12 +102,12 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
           {/* <SearchAppBar /> */}
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button className="topnav-buttons" key={item} sx={{ color: '#fff'}} onClick={event => handleOption(item)}>
+              <Button className="topnav-buttons" key={item} sx={{ color: '#fff' }} onClick={event => handleOption(item)}>
                 {item}
               </Button>
             ))}
             <IconButton
-            className="topnav-buttons"
+              className="topnav-buttons"
               size="large"
               aria-label="account of current user"
               aria-controls="primary-search-account-menu"
@@ -139,7 +118,7 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
               <AccountCircle />
             </IconButton>
             <IconButton
-            className="topnav-buttons"
+              className="topnav-buttons"
               size="large"
               aria-label="account of current user"
               aria-controls="primary-search-account-menu"
@@ -176,54 +155,54 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
           </List>
         </Box>
       </Drawer>}
-      {page === ('Buy' || '') && 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
-        <div className='home-title'>
-        <Typography variant="h6" sx={{ marginBottom: 3, marginLeft: 4}}>{title}
-        </Typography>
-        {title === 'All Products' && <div className='select'>
-        <BasicSelect handleCallBack={CallBack}/>
-        </div>
-}
-        </div>
-        <div className="cards-shower">
-      {datas ? datas.map((product) => (
-        <div className="cards-details" onClick={handleProductClick}>
-          <Card sx={{ maxWidth: 300 }}>
-            <CardMedia
-              component="img"
-              alt={product.ProductName}
-              height="140"
-              image={product.ImgLink}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {product.ProductName}
-              </Typography>
-               <Typography gutterBottom variant="h6" component="div">
-                {'€'+product.Price}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button className="topnav-buttons" size="small">Add To Cart</Button>
-            </CardActions>
-          </Card>
-        </div>
-      )) : <div>Loading</div>}
-    </div>
-      </Box>}
+      {page === ('Buy' || '') &&
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Toolbar />
+          <div className='home-title'>
+            <Typography variant="h6" sx={{ marginBottom: 3, marginLeft: 4 }}>{title}
+            </Typography>
+            {title === 'All Products' && <div className='select'>
+              <BasicSelect handleCallBack={CallBack} />
+            </div>
+            }
+          </div>
+          <div className="cards-shower">
+            {datas ? datas.map((product) => (
+              <div className="cards-details" onClick={handleProductClick}>
+                <Card sx={{ maxWidth: 300 }}>
+                  <CardMedia
+                    component="img"
+                    alt={product.ProductName}
+                    height="140"
+                    image={product.ImgLink}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {product.ProductName}
+                    </Typography>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {'€' + product.Price}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button className="topnav-buttons" size="small">Add To Cart</Button>
+                  </CardActions>
+                </Card>
+              </div>
+            )) : <div>Loading</div>}
+          </div>
+        </Box>}
       {/* {page === 'ProductDetails' &&  <Description prodName={prodName}/> */}
       <Box>
-{(page === 'Sell') &&
-    <SellItemPage/>
-      }
-    </Box>
-    <Box>
-    {(page === 'About Us') &&
-    <AboutUsPage/>
-      }
-    </Box>
+        {(page === 'Sell') &&
+          <SellItemPage />
+        }
+      </Box>
+      <Box>
+        {(page === 'About Us') &&
+          <AboutUsPage />
+        }
+      </Box>
     </Box>
   );
 }
