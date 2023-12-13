@@ -12,17 +12,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 let result = {}
 
 export default function SellItemPage() {
 
-
-
     const categories = ['Men', 'Women', 'Kids'];
     const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
-    const [selectedValue, setSelectedValue] = React.useState('');
     const [customerName, setCustomerName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [email, setEmailId] = useState("")
@@ -35,7 +31,6 @@ export default function SellItemPage() {
     const [priceQuoted, setPriceQuoted] = useState("")
     const [priceNegotiable, setPriceNegotiable] = useState("")
     const [dialogOpen, setDialogOpen] = React.useState(false);
-    // const [isFormInvalid, setIsFormInvalid] = useState(false);
     const [isCustomerNameInvalid, setCustomerNameError] = useState(false);
     const [isPhoneNumberInvalid, setPhoneNumberError] = useState(false);
     const [isEmailIDInvalid, setEmailIDError] = useState(false);
@@ -47,7 +42,6 @@ export default function SellItemPage() {
     const [isPriceNegotiableInvalid, setPriceNegotiableError] = useState(false);
     const [isAgeInvalid, setAgeError] = useState(false);
     const [isPriceQuotedInvalid, setPriceQuotedError] = useState(false);
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
