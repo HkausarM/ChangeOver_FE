@@ -156,7 +156,7 @@ export default function ClippedDrawer() {
                     image={product.ImgLink}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography className='prod-name' gutterBottom variant="h6" component="div">
                       {product.ProductName}
                     </Typography>
                     <div className="price-discount">

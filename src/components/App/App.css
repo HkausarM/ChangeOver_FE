@@ -106,3 +106,10 @@ flex-direction: row;
 .badge {
   margin-left: 10%
 }
+
+.prod-name {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
