@@ -17,13 +17,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Button, CardActions } from "@mui/material";
 import { UrlProvider } from "../../provider/domainUrlProvider";
-import SellItemPage from "../home/sellItem"
+import SellItemPage from "./SellItem"
+// import Description from "../nav/ProdDetails"
+import BasicSelect from "../nav/Filter"
+import AboutUsPage from './AboutUs';
 
+let prodName = ''
 export default function ClippedDrawer() {
   
   const [datas, setData] = useState();
   const [title, setTitle] = useState(); 
   const [page, setPage] = useState('');
+
 
   const drawerWidth = 240;
 
@@ -38,6 +43,7 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
   }
 
   const handleOption = (i) => {
+    console.log(i)
     setPage(i)
   }
 
@@ -78,6 +84,14 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
   }
   }
 
+  const handleProductClick = (e) => {
+    console.log('opening prod details', e.target.alt)
+    prodName = e.target.alt
+    setPage('ProductDetails')
+    
+
+  }
+
   useEffect(() => {
     setPage('Buy')
     fetch(new UrlProvider().getDomainUrl() + '/home')
@@ -89,6 +103,10 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
       .catch(error => console.error(error));
     
   }, []);
+
+  function CallBack(childData){
+    setData(childData.filterProducts)
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -134,7 +152,7 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer
+      {page === ('Buy' || '') && <Drawer
         variant="permanent"
         sx={{
           width: drawerWidth,
@@ -157,16 +175,21 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
             ))}
           </List>
         </Box>
-      </Drawer>
+      </Drawer>}
       {page === ('Buy' || '') && 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <div>
+        <div className='home-title'>
         <Typography variant="h6" sx={{ marginBottom: 3, marginLeft: 4}}>{title}
         </Typography>
+        {title === 'All Products' && <div className='select'>
+        <BasicSelect handleCallBack={CallBack}/>
+        </div>
+}
+        </div>
         <div className="cards-shower">
       {datas ? datas.map((product) => (
-        <div className="cards-details">
+        <div className="cards-details" onClick={handleProductClick}>
           <Card sx={{ maxWidth: 300 }}>
             <CardMedia
               component="img"
@@ -188,11 +211,17 @@ const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale'];
           </Card>
         </div>
       )) : <div>Loading</div>}
-    </div></div>
+    </div>
       </Box>}
+      {/* {page === 'ProductDetails' &&  <Description prodName={prodName}/> */}
       <Box>
 {(page === 'Sell') &&
     <SellItemPage/>
+      }
+    </Box>
+    <Box>
+    {(page === 'About Us') &&
+    <AboutUsPage/>
       }
     </Box>
     </Box>

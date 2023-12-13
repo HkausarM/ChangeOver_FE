@@ -1,5 +1,5 @@
 import './App.css';
-import ClippedDrawer from '../nav/SideNav';
+import ClippedDrawer from '../pages/HomePage';
 
 function App() {
   return (
