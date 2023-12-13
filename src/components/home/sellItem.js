@@ -22,10 +22,81 @@ export default function SellItemPage() {
 
     const categories = ['Men', 'Women', 'Kids'];
     const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+    const [selectedValue, setSelectedValue] = React.useState('');
+    const [customerName, setCustomerName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [email, setEmailId] = useState("")
+    const [address, setAddress] = useState("")
+    const [productName, setProductName] = useState("")
+    const [productDescription, setProductDescription] = useState("")
+    const [productSize, setProductSize] = useState("")
+    const [productCategory, setProductCategory] = useState("")
+    const [productAge, setProductAge] = useState("")
+    const [priceQuoted, setPriceQuoted] = useState("")
     const [priceNegotiable, setPriceNegotiable] = useState("")
     const [dialogOpen, setDialogOpen] = React.useState(false);
     // const [isFormInvalid, setIsFormInvalid] = useState(false);
+    const [isCustomerNameInvalid, setCustomerNameError] = useState(false);
+    const [isPhoneNumberInvalid, setPhoneNumberError] = useState(false);
+    const [isEmailIDInvalid, setEmailIDError] = useState(false);
+    const [isAddressInvalid, setAddressError] = useState(false);
+    const [isProductNameInvalid, setProductNameError] = useState(false);
+    const [isproductDescription, setProductDescriptionError] = useState(false)
+    const [isCategoryInvalid, setCategoryError] = useState(false);
+    const [isSizeInvalid, setSizeError] = useState(false);
+    const [isPriceNegotiableInvalid, setPriceNegotiableError] = useState(false);
+    const [isAgeInvalid, setAgeError] = useState(false);
+    const [isPriceQuotedInvalid, setPriceQuotedError] = useState(false);
 
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const sendSellItem = [];
+        sendSellItem.push({
+            "CustomerName": customerName ? customerName : setCustomerNameError(true),
+            "PhoneNumber": phoneNumber ? phoneNumber : setPhoneNumberError(true),
+            "EmailID": email ? email :setEmailIDError(true),
+            "Address": address ? address : setAddressError(true),
+            "ProductName": productName ? productName : setProductNameError(true),
+            "ProductDescription": productDescription ? productDescription : setProductDescriptionError(true),
+            "Size": productSize ? productSize : setSizeError(true),
+            "Category": productCategory ? productCategory : setCategoryError(true),
+            "PriceNegotiable": priceNegotiable ? priceNegotiable : setPriceNegotiableError(true),
+            "Age": productAge ? productAge : setAgeError(true),
+            "PriceQuoted": priceQuoted ? priceQuoted : setPriceQuotedError(true)
+        })
+        console.log("sendSellItem" , sendSellItem)
+        console.log("condition" , customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted)
+        if (customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted) {
+        console.log("test")
+        fetch(new UrlProvider().getDomainUrl() + '/sell', {
+            method: 'POST',
+            body: JSON.stringify(sendSellItem[0]),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(async (response) => {
+            result = await response.json();
+            if (result.status == 200) {
+                console.log(result)
+                setDialogOpen(true);
+            }
+        });
+    }
+    }
+
+    const handleChange = (event) => {
+        setPriceNegotiable(event.target.value)
+        if(event.target.value != ''){
+            setPriceNegotiableError(false)}
+            else{
+                setPriceNegotiableError(true)  
+            }};
+
+    const handleClose = () => {
+        setDialogOpen(false);
+        window.location.reload(true);
+    };
 
     return (
         <Box className="sell-item-page"
@@ -44,8 +115,15 @@ export default function SellItemPage() {
                     type="input"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {setCustomerName(e.target.value)
+                        if(e.target.value != ''){
+                            setCustomerNameError(false)}
+                            else{
+                                setCustomerNameError(true)  
+                            }}}
                     fullWidth
                     required
+                    error={isCustomerNameInvalid}
                 />
                 <TextField
                     id="phone-number"
@@ -53,8 +131,14 @@ export default function SellItemPage() {
                     type="telephone"
                     autoComplete="off"
                     variant="standard"
-                   
+                    onChange={e => {setPhoneNumber(e.target.value)
+                        if(e.target.value != ''){
+                            setPhoneNumberError(false)}
+                            else{
+                                setPhoneNumberError(true)  
+                            }}}
                     required
+                    error={isPhoneNumberInvalid}
                 />
                 <TextField
                     id="emailid"
@@ -62,7 +146,14 @@ export default function SellItemPage() {
                     type="email"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {setEmailId(e.target.value)
+                        if(e.target.value != ''){
+                            setEmailIDError(false)}
+                            else{
+                                setEmailIDError(true)  
+                            }}}
                     required
+                    error={isEmailIDInvalid}
                 />
                 <TextField
                     id="address"
@@ -70,7 +161,16 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {
+                        setAddress(e.target.value);
+                        if(e.target.value != ''){
+                        setAddressError(false)}
+                        else{
+                            setAddressError(true)  
+                        }
+                    }}
                     required
+                    error={isAddressInvalid}
                 />
                 <TextField
                     id="product-name"
@@ -78,7 +178,15 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {
+                        setProductName(e.target.value)
+                        if(e.target.value != ''){
+                            setProductNameError(false)}
+                            else{
+                                setProductNameError(true)  
+                            }}}
                     required
+                    error={isProductNameInvalid}
                 />
                 <TextField
                     id="product-description"
@@ -86,7 +194,15 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {
+                        setProductDescription(e.target.value)
+                        if(e.target.value != ''){
+                            setProductDescriptionError(false)}
+                            else{
+                                setProductDescriptionError(true)  
+                            }}}
                     required
+                    error={isproductDescription}
                 />
                 <TextField
                     id="product-size"
@@ -97,6 +213,14 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
+                    onChange={e => {
+                        setProductSize(e.target.value)
+                        if(e.target.value != ''){
+                            setSizeError(false)}
+                            else{
+                                setSizeError(true)  
+                            }}}
+                    error={isSizeInvalid}
                 > {sizes.map((size) => (
                     <MenuItem key={size} value={size}>
                         {size}
@@ -112,7 +236,15 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
-                    error={isCategoryInvalid}                >
+                    error={isCategoryInvalid}
+                    onChange={e => {
+                        setProductCategory(e.target.value)
+                        if(e.target.value != ''){
+                            setCategoryError(false)}
+                            else{
+                                setCategoryError(true)  
+                            }}}
+                >
                     {categories.map((category) => (
                         <MenuItem key={category} value={category}>
                             {category}
@@ -124,14 +256,31 @@ export default function SellItemPage() {
                     label="Product Age"
                     type="text"
                     variant="standard"
+                    onChange={e => {
+                        setProductAge(e.target.value)
+                        if(e.target.value != ''){
+                            setAgeError(false)}
+                            else{
+                                setAgeError(true)  
+                            }}
+                    }
                     required
+                    error={isAgeInvalid}
                 />
                 <TextField
                     id="price-quoted"
                     label="Price Quoted"
                     type="text"
                     variant="standard"
+                    onChange={e => {
+                        setPriceQuoted(e.target.value)
+                        if(e.target.value != ''){
+                            setPriceQuotedError(false)}
+                            else{
+                                setPriceQuotedError(true)  
+                            }}}
                     required
+                    error={isPriceQuotedInvalid}
                 />
                 <br></br>
                 <FormLabel id="demo-controlled-radio-buttons-group">Price Negotiable</FormLabel>
@@ -139,6 +288,8 @@ export default function SellItemPage() {
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
                     value={priceNegotiable}
+                    onChange={handleChange}
+                    error={isPriceNegotiableInvalid}
                 >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
