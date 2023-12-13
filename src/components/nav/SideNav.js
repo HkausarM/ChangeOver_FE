@@ -19,9 +19,6 @@ import { Button, CardActions } from "@mui/material";
 import { UrlProvider } from "../../provider/domainUrlProvider";
 import SellItemPage from "../home/sellItem"
 
-// import SingleLineGridList from '../home/HomeOverlay';
-
-
 export default function ClippedDrawer() {
   
   const [datas, setData] = useState();
