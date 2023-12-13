@@ -23,10 +23,71 @@ export default function SellItemPage() {
 
     const categories = ['Men', 'Women', 'Kids'];
     const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+    const [customerName, setCustomerName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [email, setEmailId] = useState("")
+    const [address, setAddress] = useState("")
+    const [productName, setProductName] = useState("")
+    const [productDescription, setProductDescription] = useState("")
+    const [productSize, setProductSize] = useState("")
+    const [productCategory, setProductCategory] = useState("")
+    const [productAge, setProductAge] = useState("")
+    const [priceQuoted, setPriceQuoted] = useState("")
     const [priceNegotiable, setPriceNegotiable] = useState("")
     const [dialogOpen, setDialogOpen] = React.useState(false);
     // const [isFormInvalid, setIsFormInvalid] = useState(false);
+    const [isPhoneNumberInvalid, setPhoneNumberError] = useState(false);
+    const [isPriceNegotiableInvalid, setPriceNegotiableError] = useState(false);
 
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const sendSellItem = [];
+        sendSellItem.push({
+            "CustomerName": customerName,
+            "PhoneNumber": phoneNumber,
+            "EmailID": email,
+            "Address": address,
+            "ProductName": productName,
+            "ProductDescription": productDescription,
+            "Size": productSize,
+            "Category": productCategory,
+            "PriceNegotiable": priceNegotiable ,
+            "Age": productAge,
+            "PriceQuoted": priceQuoted,
+        })
+        console.log("sendSellItem" , sendSellItem)
+        console.log("condition" , customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted)
+        if (customerName && phoneNumber && email && address && productName && productDescription && productSize && productCategory && productAge && priceNegotiable && priceQuoted) {
+        console.log("test")
+        fetch(new UrlProvider().getDomainUrl() + '/sell', {
+            method: 'POST',
+            body: JSON.stringify(sendSellItem[0]),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(async (response) => {
+            result = await response.json();
+            if (result.status == 200) {
+                console.log(result)
+                setDialogOpen(true);
+            }
+        });
+    }
+    }
+
+    const handleChange = (event) => {
+        setPriceNegotiable(event.target.value)
+        if(event.target.value != ''){
+            setPriceNegotiableError(false)}
+            else{
+                setPriceNegotiableError(true)  
+            }};
+
+    const handleClose = () => {
+        setDialogOpen(false);
+        window.location.reload(true);
+    };
 
     return (
         <Box className="sell-item-page"
@@ -54,8 +115,8 @@ export default function SellItemPage() {
                     type="telephone"
                     autoComplete="off"
                     variant="standard"
-                   
                     required
+                    error={isPhoneNumberInvalid}
                 />
                 <TextField
                     id="emailid"
@@ -113,7 +174,7 @@ export default function SellItemPage() {
                     type="text"
                     autoComplete="off"
                     variant="standard"
-                    error={isCategoryInvalid}                >
+                >
                     {categories.map((category) => (
                         <MenuItem key={category} value={category}>
                             {category}
@@ -140,6 +201,8 @@ export default function SellItemPage() {
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
                     value={priceNegotiable}
+                    onChange={handleChange}
+                    error={isPriceNegotiableInvalid}
                 >
                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                     <FormControlLabel value="No" control={<Radio />} label="No" />
