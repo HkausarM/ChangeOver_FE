@@ -106,28 +106,6 @@ export default function ClippedDrawer() {
                 {item}
               </Button>
             ))}
-            <IconButton
-              className="topnav-buttons"
-              size="large"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-              onClick={handleLogin}
-            >
-              <AccountCircle />
-            </IconButton>
-            <IconButton
-              className="topnav-buttons"
-              size="large"
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-              onClick={handleCart}
-            >
-              <AddShoppingCartIcon />
-            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
