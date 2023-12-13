@@ -28,7 +28,7 @@ export default function ClippedDrawer() {
   const drawerWidth = 240;
 
 const navItems = ['Buy', 'Sell', 'About Us']; 
-const sideNavItems = ['Men', 'Women', 'Kids', 'On Sale']; 
+const sideNavItems = ['All Products','Men', 'Women', 'Kids', 'On Sale']; 
   const handleLogin = () => {
     console.log('account icon clicked')
   }
@@ -38,32 +38,43 @@ const sideNavItems = ['Men', 'Women', 'Kids', 'On Sale'];
   }
 
   const handleOption = (i) => {
-    console.log(i)
     setPage(i)
   }
 
   const handleSideMenuOption = (i) => {
     console.log('sideoption', i)
-    if(i != 'On Sale')
+    if(i !== 'On Sale' && i !== 'All Products')
     {
-      console.log('inside id', i)
+      console.log("1st if")
     fetch(new UrlProvider().getDomainUrl() + '/category/'+ i)
     .then(async(response) => {
       const productResponse = await response.json()
-      console.log("datas", productResponse)
       setData(productResponse.categoryProducts)
       setTitle(i)
     })
     .catch(error => console.error(error));
-  } else {
+  } else if( i == 'On Sale')
+  {
+    console.log("onsale")
     fetch(new UrlProvider().getDomainUrl() + '/home')
       .then(async(response) => {
         const productResponse = await response.json()
-        console.log("datas", productResponse)
         setData(productResponse.saleProducts)
       })
       .catch(error => console.error(error));
       setTitle(i)
+  }
+  else if ( i == 'All Products')
+  {
+    console.log("allprod")
+    fetch(new UrlProvider().getDomainUrl() + '/home')
+    .then(async(response) => {
+      const productResponse = await response.json()
+      console.log(productResponse)
+      setData(productResponse.allProducts)
+      setTitle('All Products')
+    })
+    .catch(error => console.error(error));
   }
   }
 
@@ -72,7 +83,6 @@ const sideNavItems = ['Men', 'Women', 'Kids', 'On Sale'];
     fetch(new UrlProvider().getDomainUrl() + '/home')
       .then(async(response) => {
         const productResponse = await response.json()
-        console.log("datas", productResponse)
         setData(productResponse.allProducts)
         setTitle('All Products')
       })
